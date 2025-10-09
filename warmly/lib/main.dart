@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:warmly/daily_tips.dart';
+
 import 'instant_relief_tools/breathing_page.dart';
 import 'instant_relief_tools/stretching_page.dart';
 import 'instant_relief_tools/relaxation_page.dart';
 import 'package:intl/intl.dart';
-import 'affirmations.dart';
+
+import 'messages/daily_tips.dart';
+import 'messages/affirmations.dart';
 
 void main() {
   runApp(const WarmlyApp());
