@@ -9,7 +9,7 @@ class StretchingPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Stretching Routine"), backgroundColor: const Color(0xFF6A5AE0)),
       body: const Center(child: Text("Simple stretching routines here", style: TextStyle(fontSize: 18))),
-      bottomNavigationBar: const BottomNavBar(currentIndex: 2),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 1),
     );
   }
 }

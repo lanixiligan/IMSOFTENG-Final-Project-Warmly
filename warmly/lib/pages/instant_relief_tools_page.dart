@@ -7,63 +7,91 @@ class InstantReliefToolsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F8FF),
       appBar: AppBar(
-        title: const Text("Instant Relief Tools"),
         backgroundColor: const Color(0xFF6A5AE0),
+        elevation: 0,
+        title: const Text(
+          'Instant Relief Tools',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _buildToolButton(
+            const SizedBox(height: 40),
+            _buildToolCard(
               context,
-              "Breathing Exercise",
+              'Breathing Exercise',
               Icons.air,
               '/breathing',
             ),
-            const SizedBox(height: 20),
-            _buildToolButton(
+            const SizedBox(height: 24),
+            _buildToolCard(
               context,
-              "Stretching Routine",
+              'Stretching Routine',
               Icons.self_improvement,
               '/stretching',
             ),
-            const SizedBox(height: 20),
-            _buildToolButton(
+            const SizedBox(height: 24),
+            _buildToolCard(
               context,
-              "Relaxation Guide",
+              'Relaxation Guide',
               Icons.spa,
               '/relaxation',
             ),
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(currentIndex: 0),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 1),
     );
   }
 
-  Widget _buildToolButton(
-      BuildContext context, String title, IconData icon, String route) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF6A5AE0),
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+  Widget _buildToolCard(
+    BuildContext context,
+    String title,
+    IconData icon,
+    String route,
+  ) {
+    return InkWell(
+      onTap: () => Navigator.pushNamed(context, route),
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+        decoration: BoxDecoration(
+          color: const Color(0xFF6A5AE0),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
-      ),
-      onPressed: () => Navigator.pushNamed(context, route),
-      icon: Icon(icon, color: Colors.white),
-      label: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: Colors.white, size: 28),
+            const SizedBox(width: 12),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
-

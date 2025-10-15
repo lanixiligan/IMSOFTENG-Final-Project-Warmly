@@ -9,7 +9,7 @@ class RelaxationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Relaxation Sounds"), backgroundColor: const Color(0xFF6A5AE0)),
       body: const Center(child: Text("Relaxation audios and sounds here", style: TextStyle(fontSize: 18))),
-      bottomNavigationBar: const BottomNavBar(currentIndex: 3),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 1),
     );
   }
 }
