@@ -67,29 +67,6 @@ class DailyTipCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF6A5AE0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-            ),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Log menstruation tapped")),
-              );
-            },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-              child: Text(
-                "LOG MENSTRUATION",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );

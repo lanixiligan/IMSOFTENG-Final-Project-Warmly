@@ -10,7 +10,7 @@ class BottomNavBar extends StatelessWidget {
         Navigator.pushNamedAndRemoveUntil(context, '/home', (r) => false);
         break;
       case 1:
-        Navigator.pushNamedAndRemoveUntil(context, '/breathing', (r) => false);
+        Navigator.pushNamedAndRemoveUntil(context, '/instant_relief_tools', (r) => false);
         break;
       case 2:
         Navigator.pushNamedAndRemoveUntil(context, '/hotlines', (r) => false);
