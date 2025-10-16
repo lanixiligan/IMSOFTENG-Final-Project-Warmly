@@ -11,9 +11,7 @@ import '../pages/login_page.dart';
 import '../pages/register_page.dart';
 import '../pages/profile_page.dart';
 import '../pages/reminders_page.dart';
-
-
-
+import '../pages/forgot_password_page.dart';
 
 class AppRoutes {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -40,6 +38,8 @@ class AppRoutes {
         return NoTransitionPageRoute(builder: (_) => const ProfilePage(), settings: settings);
       case '/reminders':
         return NoTransitionPageRoute(builder: (_) => const RemindersPage(), settings: settings);
+      case '/forgot_password':
+        return NoTransitionPageRoute(builder: (_) => const ForgotPasswordPage(), settings: settings);
       default:
         return NoTransitionPageRoute(builder: (_) => const HomePage(), settings: settings);
     }

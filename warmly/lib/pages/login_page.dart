@@ -224,16 +224,28 @@ class _LoginPageState extends State<LoginPage> {
                                 final confirm = await showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                    title: const Text('Confirm Guest Login'),
-                                    content: const Text('Are you sure you want to continue as a guest?'),
+                                    title: const Text(
+                                      'Confirm Guest Login',
+                                      style: TextStyle(color: Color(0xFF6A5AE0)),
+                                    ),
+                                    content: const Text(
+                                      'Are you sure you want to continue as a guest?',
+                                      style: TextStyle(color: Color(0xFF6A5AE0)),
+                                    ),
                                     actions: [
                                       TextButton(
                                         onPressed: () => Navigator.pop(context, false),
-                                        child: const Text('Cancel'),
+                                        child: const Text(
+                                          'Cancel',
+                                          style: TextStyle(color: Color(0xFF6A5AE0)),
+                                        ),
                                       ),
                                       TextButton(
                                         onPressed: () => Navigator.pushReplacementNamed(context, '/homepage'),
-                                        child: const Text('Continue'),
+                                        child: const Text(
+                                          'Continue',
+                                          style: TextStyle(color: Color(0xFF6A5AE0)),
+                                        ),
                                       ),
                                     ],
                                   ),

@@ -100,7 +100,11 @@ class _RegisterPageState extends State<RegisterPage> {
             children: [
               const Text(
                 "Create Your Account",
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Color(0xFF6A5AE0),
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 10),
               const Text(
