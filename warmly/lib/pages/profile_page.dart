@@ -19,11 +19,11 @@ class ProfilePage extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        backgroundColor: const Color(0xFF6A5AE0), // Matches your theme
+        backgroundColor: const Color(0xFF6A5AE0), // Theme consistent
         elevation: 4,
       ),
       body: SafeArea(
-        child: AnimatedOpacity( // Add fade-in animation for smoother appearance
+        child: AnimatedOpacity(
           opacity: 1.0,
           duration: const Duration(milliseconds: 300),
           child: Padding(
@@ -31,7 +31,7 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // 🌈 Header
+                // 🌈 Header with gradient
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(vertical: 40),
@@ -56,11 +56,10 @@ class ProfilePage extends StatelessWidget {
                           Icons.person,
                           size: 55,
                           color: Colors.white,
-                          semanticLabel: 'User Avatar', // Accessibility
+                          semanticLabel: 'User Avatar',
                         ),
                       ),
                       const SizedBox(height: 16),
-                      
                       // Name or Email
                       Text(
                         user?.email ?? "Guest User",
@@ -94,8 +93,8 @@ class ProfilePage extends StatelessWidget {
 
                       // Email Card
                       Card(
-                        elevation: 5, // Increased for better shadow effect
-                        shadowColor: Colors.grey.shade200,
+                        elevation: 5,
+                        shadowColor: Colors.purple.withOpacity(0.2),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -112,7 +111,7 @@ class ProfilePage extends StatelessWidget {
                       if (user != null)
                         Card(
                           elevation: 5,
-                          shadowColor: Colors.grey.shade200,
+                          shadowColor: Colors.purple.withOpacity(0.2),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
@@ -126,40 +125,42 @@ class ProfilePage extends StatelessWidget {
                           ),
                         ),
 
-                      const Spacer(flex: 1), // Flexible spacer for better layout
+                      const Spacer(flex: 1),
 
                       // 🚪 Logout Button
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton.icon(
-                          onPressed: () async {
-                            try {
-                              await FirebaseAuth.instance.signOut();
-                              Navigator.pushReplacementNamed(context, '/login');
-                            } catch (e) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Logout failed: $e')),
-                              );
-                            }
-                          },
-                          icon: const Icon(Icons.logout, color: Colors.white),
-                          label: const Text(
-                            "Logout",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                      Center(
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton.icon(
+                            onPressed: () async {
+                              try {
+                                await FirebaseAuth.instance.signOut();
+                                Navigator.pushReplacementNamed(context, '/login');
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Logout failed: $e')),
+                                );
+                              }
+                            },
+                            icon: const Icon(Icons.logout, color: Colors.white),
+                            label: const Text(
+                              "Logout",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF6A5AE0),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF6A5AE0),
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20), // Added for bottom padding
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),

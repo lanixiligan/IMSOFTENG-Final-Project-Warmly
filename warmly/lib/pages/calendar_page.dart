@@ -111,7 +111,6 @@ class _CalendarPageState extends State<CalendarPage> {
             calendarBuilders: CalendarBuilders(
               defaultBuilder: (context, day, focusedDay) {
                 if (_isPeriodDay(day)) {
-                  // 🔴 Red circle for period days
                   return Center(
                     child: Container(
                       width: 40,
@@ -129,16 +128,16 @@ class _CalendarPageState extends State<CalendarPage> {
                     ),
                   );
                 }
-                return null;  // Falls back to default style
+                return null; // fallback to default style
               },
               todayBuilder: (context, day, focusedDay) {
-                // Highlight today (purple)
+                final isPeriod = _isPeriodDay(day);
                 return Center(
                   child: Container(
                     width: 40,
                     height: 40,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF6A5AE0),
+                    decoration: BoxDecoration(
+                      color: isPeriod ? Colors.red : const Color(0xFF6A5AE0), // red if period, else purple
                       shape: BoxShape.circle,
                     ),
                     alignment: Alignment.center,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
   const BottomNavBar({super.key, required this.currentIndex});
@@ -24,20 +25,15 @@ class BottomNavBar extends StatelessWidget {
       margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color(0xFF6A5AE0),
         borderRadius: BorderRadius.circular(24),
-        boxShadow: [
+         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 12,
-            offset: const Offset(0, -3),
+            color: Color(0xFF6A5AE0),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
         ],
-        gradient: LinearGradient(
-          colors: [Colors.white, Colors.grey.shade100],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -56,13 +52,13 @@ class BottomNavBar extends StatelessWidget {
       duration: const Duration(milliseconds: 250),
       padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
-        color: isSelected ? const Color(0xFF6A5AE0).withOpacity(0.15) : Colors.transparent,
+        color: isSelected ? const Color.fromARGB(255, 183, 175, 245).withOpacity(0.15) : Colors.transparent,
         borderRadius: BorderRadius.circular(16),
       ),
       child: IconButton(
         icon: Icon(
           icon,
-          color: isSelected ? const Color(0xFF6A5AE0) : Colors.grey.shade400,
+          color: Colors.white,
           size: 28,
         ),
         splashRadius: 28,

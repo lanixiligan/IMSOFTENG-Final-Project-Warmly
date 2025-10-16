@@ -20,7 +20,7 @@ class WarmlyApp extends StatelessWidget {
       title: 'Warmly',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFF8F8FF),
+       scaffoldBackgroundColor: const Color.fromARGB(255, 234, 232, 243),
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6A5AE0)),
         useMaterial3: true,
       ),

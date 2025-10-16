@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F8FF),
+      backgroundColor: Color.fromARGB(255, 234, 232, 243),
       body: Stack( // Use Stack for overlay loading indicator
         children: [
           Center(

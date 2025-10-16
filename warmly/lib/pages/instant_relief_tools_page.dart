@@ -7,14 +7,14 @@ class InstantReliefToolsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),  // Soft light gray for consistency with other pages
+      backgroundColor: Color.fromARGB(255, 234, 232, 243),  // Soft light gray for consistency with other pages
       appBar: AppBar(
-        backgroundColor: const Color(0xFF6A5AE0),
+        backgroundColor: Color(0xFF6A5AE0),
         elevation: 4,  // Added subtle elevation for a more defined look
         title: const Text(
           'Instant Relief Tools',
           style: TextStyle(
-            color: Colors.white,
+            color: Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.bold,  // Boldened for emphasis
             fontSize: 20,  // Slightly increased for better readability
           ),
@@ -67,26 +67,26 @@ class InstantReliefToolsPage extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),  // Increased vertical padding for a roomier feel
         decoration: BoxDecoration(
-          color: const Color(0xFF6A5AE0),  // Kept purple theme
+          color: Color(0xFF6A5AE0),  // Kept purple theme
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
-            BoxShadow(
-              color: Colors.black26,  // Slightly darker shadow for better depth
-              blurRadius: 8,  // Increased for a softer, more modern effect
-              offset: const Offset(0, 4),
-            ),
-          ],
+              BoxShadow(
+                color: Color(0xFF6A5AE0),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,  // Adjusted to better center content
           children: [
-            Icon(icon, color: Colors.white, size: 32),  // Increased icon size for prominence
+            Icon(icon, color: Color(0xFF6A5AE0), size: 32),  // Increased icon size for prominence
             const SizedBox(width: 16),  // Increased spacing between icon and text
             Text(
               title,
               style: const TextStyle(
-                color: Colors.white,
+                color: Color.fromARGB(255, 255, 255, 255),
                 fontWeight: FontWeight.bold,
                 fontSize: 18,  // Kept consistent, but ensured it matches overall design
               ),

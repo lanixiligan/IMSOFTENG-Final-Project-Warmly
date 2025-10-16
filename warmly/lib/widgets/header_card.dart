@@ -30,13 +30,17 @@ class _HeaderCardState extends State<HeaderCard> {
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient: const LinearGradient(
+          colors: [Color(0xFF6A5AE0), Color.fromARGB(255, 83, 73, 194)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Color(0xFF6A5AE0),
             blurRadius: 8,
-            offset: const Offset(0, 4),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -60,10 +64,14 @@ class _HeaderCardState extends State<HeaderCard> {
               ),
               const Text(
                 "Warmly",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white, // Slightly darker purple for contrast
+                ),
               ),
               IconButton(
-                icon: const Icon(Icons.calendar_today_outlined),
+                icon: const Icon(Icons.calendar_today_outlined, color: Color.fromARGB(255, 255, 255, 255)),
                 onPressed: () {
                   Navigator.pushNamed(context, '/calendar');
                 },
@@ -80,24 +88,27 @@ class _HeaderCardState extends State<HeaderCard> {
               setState(() {
                 _focusedDay = focusedDay;
               });
-              widget.onDateSelected(selectedDay); // ✅ notify parent
+              widget.onDateSelected(selectedDay); 
             },
             calendarFormat: CalendarFormat.week,
             headerVisible: false,
             daysOfWeekStyle: const DaysOfWeekStyle(
-              weekdayStyle: TextStyle(color: Colors.black54),
-              weekendStyle: TextStyle(color: Colors.black54),
+              weekdayStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+              weekendStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.bold),
             ),
             calendarStyle: CalendarStyle(
               selectedDecoration: const BoxDecoration(
-                color: Color(0xFF6A5AE0),
+                color: Color.fromARGB(255, 234, 232, 243),
                 shape: BoxShape.circle,
               ),
               todayDecoration: BoxDecoration(
-                color: const Color(0xFF6A5AE0).withOpacity(0.2),
+                color: const Color(0xFF4C3CA5),
                 shape: BoxShape.circle,
               ),
-              selectedTextStyle: const TextStyle(color: Colors.white),
+              selectedTextStyle: const TextStyle(color: Color(0xFF6A5AE0)),
+              todayTextStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              defaultTextStyle: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+              weekendTextStyle: const TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.w600),
             ),
           ),
         ],
