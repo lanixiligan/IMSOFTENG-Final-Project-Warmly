@@ -81,7 +81,7 @@ class InstantReliefToolsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,  // Adjusted to better center content
           children: [
-            Icon(icon, color: Color(0xFF6A5AE0), size: 32),  // Increased icon size for prominence
+            Icon(icon, color: Color.fromARGB(255, 255, 255, 255), size: 32),  // Increased icon size for prominence
             const SizedBox(width: 16),  // Increased spacing between icon and text
             Text(
               title,
