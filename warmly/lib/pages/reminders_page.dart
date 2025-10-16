@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 import '../widgets/bottom_nav_bar.dart';
 
 class Reminder {
   String title;
   TimeOfDay? time;
+  bool done;
 
-  Reminder({required this.title, this.time});
+  Reminder({required this.title, this.time, this.done = false});
 }
 
 class RemindersPage extends StatefulWidget {
@@ -18,8 +22,73 @@ class RemindersPage extends StatefulWidget {
 
 class _RemindersPageState extends State<RemindersPage> {
   final List<Reminder> _reminders = [];
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  // Cupertino-style time picker modal
+  @override
+  void initState() {
+    super.initState();
+    _initNotifications();
+  }
+
+  Future<void> _initNotifications() async {
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+    const AndroidInitializationSettings androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    final InitializationSettings initSettings =
+        InitializationSettings(android: androidSettings);
+
+    await flutterLocalNotificationsPlugin.initialize(initSettings);
+
+    // Initialize timezone package
+    tz.initializeTimeZones();
+  }
+
+  Future<void> _scheduleNotification(Reminder reminder, int id) async {
+    if (reminder.time == null) return;
+
+    final now = DateTime.now();
+    DateTime scheduled = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      reminder.time!.hour,
+      reminder.time!.minute,
+    );
+
+    // If scheduled time already passed today, schedule for next day
+    if (scheduled.isBefore(now)) {
+      scheduled = scheduled.add(const Duration(days: 1));
+    }
+
+    final tz.TZDateTime scheduledTZ = tz.TZDateTime.from(scheduled, tz.local);
+
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+      'reminder_channel',
+      'Reminders',
+      channelDescription: 'Channel for reminder notifications',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    const NotificationDetails platformDetails =
+        NotificationDetails(android: androidDetails);
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      id,
+      'Reminder',
+      reminder.title,
+      scheduledTZ,
+      platformDetails,
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      matchDateTimeComponents: DateTimeComponents.time, // daily repeat
+    );
+  }
+
   Future<TimeOfDay?> _showCupertinoTimePicker({
     required BuildContext ctx,
     TimeOfDay? initialTime,
@@ -42,32 +111,35 @@ class _RemindersPageState extends State<RemindersPage> {
           height: 260,
           decoration: BoxDecoration(
             color: CupertinoColors.systemBackground.resolveFrom(ctx),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+            borderRadius:
+                const BorderRadius.vertical(top: Radius.circular(16)),
           ),
           child: SafeArea(
             top: false,
             child: Column(
               children: [
-                // top action bar
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CupertinoButton(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 6),
                         child: const Text('Cancel'),
                         onPressed: () => Navigator.of(ctx).pop(),
                       ),
                       CupertinoButton(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                        child: const Text('Done', style: TextStyle(color: Color(0xFF6A5AE0))),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 6),
+                        child: const Text('Done',
+                            style: TextStyle(color: Color(0xFF6A5AE0))),
                         onPressed: () => Navigator.of(ctx).pop(chosen),
                       ),
                     ],
                   ),
                 ),
-                // the picker
                 SizedBox(
                   height: 180,
                   child: CupertinoDatePicker(
@@ -98,7 +170,8 @@ class _RemindersPageState extends State<RemindersPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           title: const Text(
             "Add Reminder",
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -129,7 +202,8 @@ class _RemindersPageState extends State<RemindersPage> {
                       }
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 10),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey.shade400),
                         borderRadius: BorderRadius.circular(8),
@@ -143,7 +217,8 @@ class _RemindersPageState extends State<RemindersPage> {
                                 : selectedTime!.format(context),
                             style: const TextStyle(fontSize: 16),
                           ),
-                          const Icon(Icons.access_time, color: Color(0xFF6A5AE0)),
+                          const Icon(Icons.access_time,
+                              color: Color(0xFF6A5AE0)),
                         ],
                       ),
                     ),
@@ -160,9 +235,12 @@ class _RemindersPageState extends State<RemindersPage> {
               onPressed: () {
                 if (titleController.text.isNotEmpty) {
                   setState(() {
-                    _reminders.add(
-                      Reminder(title: titleController.text, time: selectedTime),
-                    );
+                    final reminder = Reminder(
+                        title: titleController.text, time: selectedTime);
+                    _reminders.add(reminder);
+
+                    // Schedule daily notification
+                    _scheduleNotification(reminder, _reminders.length);
                   });
                   Navigator.of(context).pop();
                 }
@@ -217,24 +295,44 @@ class _RemindersPageState extends State<RemindersPage> {
               itemCount: _reminders.length,
               itemBuilder: (context, index) {
                 final reminder = _reminders[index];
-                return Card(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  elevation: 3,
-                  child: ListTile(
-                    title: Text(
-                      reminder.title,
-                      style: const TextStyle(fontSize: 16),
+                return GestureDetector(
+                  onLongPress: () => _deleteReminder(index),
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                    subtitle: reminder.time != null
-                        ? Text('Time: ${reminder.time!.format(context)}')
-                        : null,
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.redAccent),
-                      onPressed: () => _deleteReminder(index),
+                    elevation: 3,
+                    child: ListTile(
+                      leading: Checkbox(
+                        value: reminder.done,
+                        activeColor: const Color(0xFF6A5AE0),
+                        onChanged: (value) {
+                          setState(() {
+                            reminder.done = value ?? false;
+                          });
+                        },
+                      ),
+                      title: Text(
+                        reminder.title,
+                        style: TextStyle(
+                          fontSize: 16,
+                          decoration: reminder.done
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                        ),
+                      ),
+                      subtitle: reminder.time != null
+                          ? Text(
+                              'Time: ${reminder.time!.format(context)}',
+                              style: TextStyle(
+                                decoration: reminder.done
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
+                              ),
+                            )
+                          : null,
                     ),
                   ),
                 );
@@ -243,9 +341,9 @@ class _RemindersPageState extends State<RemindersPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: _addReminder,
-        backgroundColor: Color(0xFF6A5AE0),
+        backgroundColor: Colors.white,
         elevation: 6,
-        child: const Icon(Icons.add, color: Color.fromARGB(255, 255, 255, 255)),
+        child: const Icon(Icons.add, color: Color(0xFF6A5AE0)),
       ),
       bottomNavigationBar: const BottomNavBar(currentIndex: 1),
     );
