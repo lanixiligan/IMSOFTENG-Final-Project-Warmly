@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "663014793307",
+    "project_id": "warmly-ad187",
+    "storage_bucket": "warmly-ad187.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663014793307:android:c382a2655332bad1c05f7e",
+        "android_client_info": {
+          "package_name": "com.example.warmly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9ikMyxjfOfCXZV8-kfXn73CdaUz2H7ZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

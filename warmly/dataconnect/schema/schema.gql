@@ -1,0 +1,11 @@
+type User @table {
+  uid: String!
+  email: String!
+  emailVerified: Boolean!
+  creationTime: Timestamp!
+  lastSignInTime: Timestamp!
+  displayName: String
+  photoURL: String
+  phoneNumber: String
+  isAnonymous: Boolean
+}

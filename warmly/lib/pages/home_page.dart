@@ -28,11 +28,11 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               HeaderCard(
-                onDateSelected: _onDateSelected, // ✅ connect calendar
+                onDateSelected: _onDateSelected, 
                 selectedDate: _selectedDate,
               ),
               const SizedBox(height: 20),
-              DailyTipCard(selectedDate: _selectedDate), // ✅ pass date here
+              DailyTipCard(selectedDate: _selectedDate), 
               const SizedBox(height: 20),
               const AffirmationCard(),
               const SizedBox(height: 20),

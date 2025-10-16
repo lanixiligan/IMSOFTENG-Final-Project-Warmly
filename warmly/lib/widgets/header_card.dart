@@ -45,10 +45,18 @@ class _HeaderCardState extends State<HeaderCard> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const CircleAvatar(
-                radius: 18,
-                backgroundColor: Color(0xFF6A5AE0),
-                child: Text("T", style: TextStyle(color: Colors.white)),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/profile'); 
+                },
+                child: const CircleAvatar(
+                  radius: 18,
+                  backgroundColor: Color(0xFF6A5AE0),
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                  ),
+                ),
               ),
               const Text(
                 "Warmly",

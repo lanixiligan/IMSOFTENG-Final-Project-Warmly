@@ -21,16 +21,23 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 8,
-            offset: const Offset(0, -2),
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 12,
+            offset: const Offset(0, -3),
           ),
         ],
+        gradient: LinearGradient(
+          colors: [Colors.white, Colors.grey.shade100],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -45,10 +52,22 @@ class BottomNavBar extends StatelessWidget {
 
   Widget _buildIcon(BuildContext context, IconData icon, int index) {
     final isSelected = index == currentIndex;
-    return IconButton(
-      icon: Icon(icon,
-          color: isSelected ? const Color(0xFF6A5AE0) : Colors.grey.shade400),
-      onPressed: () => _onTap(context, index),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 250),
+      padding: const EdgeInsets.all(6),
+      decoration: BoxDecoration(
+        color: isSelected ? const Color(0xFF6A5AE0).withOpacity(0.15) : Colors.transparent,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: IconButton(
+        icon: Icon(
+          icon,
+          color: isSelected ? const Color(0xFF6A5AE0) : Colors.grey.shade400,
+          size: 28,
+        ),
+        splashRadius: 28,
+        onPressed: () => _onTap(context, index),
+      ),
     );
   }
 }

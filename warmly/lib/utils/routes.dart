@@ -7,6 +7,11 @@ import '../pages/calendar_page.dart';
 import 'no_transition_page_route.dart';
 import '../pages/hotlines_page.dart';
 import '../pages/instant_relief_tools_page.dart';
+import '../pages/login_page.dart';
+import '../pages/register_page.dart';
+import '../pages/profile_page.dart';
+
+
 
 
 class AppRoutes {
@@ -26,6 +31,12 @@ class AppRoutes {
         return NoTransitionPageRoute(builder: (_) => const HotlinesPage(), settings: settings);
       case '/instant_relief_tools':
         return NoTransitionPageRoute(builder: (_) => const InstantReliefToolsPage(), settings: settings);
+      case '/login':
+        return NoTransitionPageRoute(builder: (_) => const LoginPage(), settings: settings);
+      case '/register':
+        return NoTransitionPageRoute(builder: (_) => const RegisterPage(), settings: settings);
+      case '/profile':
+        return NoTransitionPageRoute(builder: (_) => const ProfilePage(), settings: settings);
       default:
         return NoTransitionPageRoute(builder: (_) => const HomePage(), settings: settings);
     }

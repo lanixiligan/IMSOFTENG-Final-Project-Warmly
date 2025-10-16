@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'utils/routes.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const WarmlyApp());
 }
 
@@ -18,8 +24,8 @@ class WarmlyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6A5AE0)),
         useMaterial3: true,
       ),
-      onGenerateRoute: AppRoutes.onGenerateRoute, // 👈 replaced routes:
-      initialRoute: '/home',
+      onGenerateRoute: AppRoutes.onGenerateRoute,
+      initialRoute: '/login', 
     );
   }
 }
