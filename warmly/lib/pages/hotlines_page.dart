@@ -32,6 +32,13 @@ class HotlinesPage extends StatelessWidget {
                 width: 180,
                 decoration: BoxDecoration(
                 color: Color(0xFF6A5AE0),
+                boxShadow: [
+                    BoxShadow(
+                      color: Color(0xFF6A5AE0),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
                 shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -48,14 +55,14 @@ class HotlinesPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black12,
+                      color: Color(0xFF6A5AE0),
                       blurRadius: 12,
                       offset: const Offset(0, 6),
                     ),
                   ],
                 ),
                 child: const Text(
-                  "Feature Coming Soon!\n\nEmergency Hotlines will be available here shortly.",
+                  "Emergency Hotlines will be available here soon.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -68,7 +75,7 @@ class HotlinesPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(currentIndex: 2),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 3),
     );
   }
 }

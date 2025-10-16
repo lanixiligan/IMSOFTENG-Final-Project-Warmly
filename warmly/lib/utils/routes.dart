@@ -10,6 +10,7 @@ import '../pages/instant_relief_tools_page.dart';
 import '../pages/login_page.dart';
 import '../pages/register_page.dart';
 import '../pages/profile_page.dart';
+import '../pages/reminders_page.dart';
 
 
 
@@ -37,6 +38,8 @@ class AppRoutes {
         return NoTransitionPageRoute(builder: (_) => const RegisterPage(), settings: settings);
       case '/profile':
         return NoTransitionPageRoute(builder: (_) => const ProfilePage(), settings: settings);
+      case '/reminders':
+        return NoTransitionPageRoute(builder: (_) => const RemindersPage(), settings: settings);
       default:
         return NoTransitionPageRoute(builder: (_) => const HomePage(), settings: settings);
     }

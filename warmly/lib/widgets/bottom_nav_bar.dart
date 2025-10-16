@@ -11,9 +11,12 @@ class BottomNavBar extends StatelessWidget {
         Navigator.pushNamedAndRemoveUntil(context, '/home', (r) => false);
         break;
       case 1:
-        Navigator.pushNamedAndRemoveUntil(context, '/instant_relief_tools', (r) => false);
+        Navigator.pushNamedAndRemoveUntil(context, '/reminders', (r) => false);
         break;
       case 2:
+        Navigator.pushNamedAndRemoveUntil(context, '/instant_relief_tools', (r) => false);
+        break;
+      case 3:
         Navigator.pushNamedAndRemoveUntil(context, '/hotlines', (r) => false);
         break;
     }
@@ -39,8 +42,9 @@ class BottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildIcon(context, Icons.home, 0),
-          _buildIcon(context, Icons.menu, 1),
-          _buildIcon(context, Icons.phone, 2),
+          _buildIcon(context, Icons.alarm, 1),
+          _buildIcon(context, Icons.menu, 2),
+          _buildIcon(context, Icons.phone, 3),
         ],
       ),
     );
